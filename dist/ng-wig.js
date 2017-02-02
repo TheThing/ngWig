@@ -61,6 +61,8 @@ angular.module('ngWig').component('ngWig', {
         }
       }
 
+      var selectionDoc = document.getSelection();
+
       _this.beforeExecCommand({ command: command, options: options });
 
       // use insertHtml for `createlink` command to account for IE/Edge purposes, in case there is no selection
@@ -72,6 +74,9 @@ angular.module('ngWig').component('ngWig', {
       }
 
       _this.afterExecCommand({ command: command, options: options });
+
+      selectionDoc.anchorNode.parentElement.target = '_blank';
+      selectionDoc.anchorNode.parentElement.setAttribute('contenteditable', 'false');
 
       // added temporarily to pass the tests. For some reason $container[0] is undefined during testing.
       if ($container.length) {

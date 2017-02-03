@@ -75,8 +75,10 @@ angular.module('ngWig').component('ngWig', {
 
       _this.afterExecCommand({ command: command, options: options });
 
-      selectionDoc.anchorNode.parentElement.target = '_blank';
-      selectionDoc.anchorNode.parentElement.setAttribute('contenteditable', 'false');
+      if (command === 'createlink') {
+        selectionDoc.anchorNode.parentElement.target = '_blank';
+        selectionDoc.anchorNode.parentElement.setAttribute('contenteditable', 'false');
+      }
 
       // added temporarily to pass the tests. For some reason $container[0] is undefined during testing.
       if ($container.length) {
